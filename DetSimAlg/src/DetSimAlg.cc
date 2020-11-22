@@ -22,6 +22,7 @@ DetSimAlg::DetSimAlg(const std::string& name)
     declProp("RunCmds", m_run_cmds);
     declProp("VisMac", m_vis_mac);
     declProp("StartEvtID", i_event);
+    declProp("print_trackID",print_trackID=-1);
 }
 
 DetSimAlg::~DetSimAlg()
@@ -69,7 +70,11 @@ DetSimAlg::initialize()
         return false;
     } 
     SetG4RunMac();
-    SetG4RunCmds();
+
+    if(print_trackID==-1)
+       { 
+         SetG4RunCmds(); 
+       }
 
     // Initialize G4 Kernel
     run_manager->Initialize();
@@ -87,6 +92,22 @@ DetSimAlg::initialize()
 bool
 DetSimAlg::execute()
 {
+ 
+ if(print_trackID!=-1)
+   { 
+      if (i_event==print_trackID)
+        {
+          G4UImanager * UImanager = G4UImanager::GetUIpointer();
+          UImanager->ApplyCommand("/tracking/verbose 2");      
+        }
+      else
+        {
+          G4UImanager * UImanager = G4UImanager::GetUIpointer();
+          UImanager->ApplyCommand("/tracking/verbose 0");
+        }
+   }
+
+
     if (m_vis_mac.length()) {
         // If user set the vis mac file,
         // start to run the GUI
