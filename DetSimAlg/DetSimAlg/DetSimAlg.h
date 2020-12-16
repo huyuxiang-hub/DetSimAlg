@@ -36,7 +36,7 @@ class DetSimAlg: public AlgBase
         G4SvcRunManager* run_manager;
 
         int i_event;
-        int print_trackID;
+        std::vector<int> print_trackID;
         
          
 

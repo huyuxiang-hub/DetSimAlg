@@ -1,4 +1,4 @@
-# echo "cleanup DetSimAlg v0 in /junofs/users/huyuxiang/juno_centos7/offline/Simulation/DetSimV2"
+# echo "cleanup DetSimAlg v0 in /afs/ihep.ac.cn/users/h/huyuxiang/junofs/juno_centos7/offline/Simulation/DetSimV2"
 
 if ( $?CMTROOT == 0 ) then
   setenv CMTROOT /cvmfs/juno.ihep.ac.cn/centos7_amd64_gcc830/Pre-Release/J20v2r0-branch/ExternalLibs/CMT/v1r26
@@ -8,9 +8,9 @@ set cmtDetSimAlgtempfile=`${CMTROOT}/mgr/cmt -quiet build temporary_name`
 if $status != 0 then
   set cmtDetSimAlgtempfile=/tmp/cmt.$$
 endif
-${CMTROOT}/mgr/cmt cleanup -csh -pack=DetSimAlg -version=v0 -path=/junofs/users/huyuxiang/juno_centos7/offline/Simulation/DetSimV2  $* >${cmtDetSimAlgtempfile}
+${CMTROOT}/mgr/cmt cleanup -csh -pack=DetSimAlg -version=v0 -path=/afs/ihep.ac.cn/users/h/huyuxiang/junofs/juno_centos7/offline/Simulation/DetSimV2  $* >${cmtDetSimAlgtempfile}
 if ( $status != 0 ) then
-  echo "${CMTROOT}/mgr/cmt cleanup -csh -pack=DetSimAlg -version=v0 -path=/junofs/users/huyuxiang/juno_centos7/offline/Simulation/DetSimV2  $* >${cmtDetSimAlgtempfile}"
+  echo "${CMTROOT}/mgr/cmt cleanup -csh -pack=DetSimAlg -version=v0 -path=/afs/ihep.ac.cn/users/h/huyuxiang/junofs/juno_centos7/offline/Simulation/DetSimV2  $* >${cmtDetSimAlgtempfile}"
   set cmtcleanupstatus=2
   /bin/rm -f ${cmtDetSimAlgtempfile}
   unset cmtDetSimAlgtempfile

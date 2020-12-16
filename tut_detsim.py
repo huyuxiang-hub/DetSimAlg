@@ -123,8 +123,7 @@ def get_parser():
     parser.set_defaults(dae=False)
 
     # print specified ID track information
-    parser.add_argument("--print-trackID", default=-1, type=int, help=mh("print the track information of event specified event ID "))
-    
+    parser.add_argument("--print-trackID", default=-1, nargs='+',type=int, help=mh("print the track information of event specified event ID "))
 
 
     # = Calibration =

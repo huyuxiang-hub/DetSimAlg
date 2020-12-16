@@ -22,7 +22,7 @@ DetSimAlg::DetSimAlg(const std::string& name)
     declProp("RunCmds", m_run_cmds);
     declProp("VisMac", m_vis_mac);
     declProp("StartEvtID", i_event);
-    declProp("print_trackID",print_trackID=-1);
+    declProp("print_trackID",print_trackID);
 }
 
 DetSimAlg::~DetSimAlg()
@@ -71,7 +71,7 @@ DetSimAlg::initialize()
     } 
     SetG4RunMac();
 
-    if(print_trackID==-1)
+    if(print_trackID[0]==-1)
        { 
          SetG4RunCmds(); 
        }
@@ -93,9 +93,12 @@ bool
 DetSimAlg::execute()
 {
  
- if(print_trackID!=-1)
+ if(print_trackID[0]!=-1)
    { 
-      if (i_event==print_trackID)
+      std::vector<int>::iterator ret;
+      ret = std::find(print_trackID.begin(), print_trackID.end(), i_event);
+     
+      if (ret!=print_trackID.end())
         {
           G4UImanager * UImanager = G4UImanager::GetUIpointer();
           UImanager->ApplyCommand("/tracking/verbose 2");      
